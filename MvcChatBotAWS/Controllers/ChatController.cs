@@ -18,12 +18,12 @@ public class ChatController: Controller
     }
 
     [HttpPost]
-    public async Task SendMessageToChatBot(string userInput)
+    public async Task<IActionResult> SendMessageToChatBot(string userInput)
     {
         var request = new RecognizeTextRequest
         {
-            BotId = "WBACPFOPCQ",
-            BotAliasId = "pruebas",
+            BotId = "PDQFFBWOFP",
+            BotAliasId = "WBACPFOPCQ",
             LocaleId = "es_ES",
             //SessionId: Es un identificador único que representa una sesión de conversación con el bot.
             //Debes generar un SessionId único para cada usuario o cada vez que inicies una nueva conversación.
@@ -41,10 +41,8 @@ public class ChatController: Controller
         // Procesa la respuesta del chatbot según sea necesario
         if (response != null && response.Messages.Count > 0)
         {
-            foreach (var message in response.Messages)
-            {
-                Console.WriteLine("Respuesta del chatbot: " + message.Content);
-            }
+            ViewBag.MENSAJE="Respuesta del chatbot: ";
         }
+        return View();
     }
 }
