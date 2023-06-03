@@ -1,9 +1,8 @@
 ﻿using Amazon.LexRuntimeV2;
 using Amazon.LexRuntimeV2.Model;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
-public class ChatController: Controller
+public class ChatController : Controller
 {
     private readonly AmazonLexRuntimeV2Client lexClient;
 
@@ -26,23 +25,30 @@ public class ChatController: Controller
             BotAliasId = "WBACPFOPCQ",
             LocaleId = "es_ES",
             //SessionId: Es un identificador único que representa una sesión de conversación con el bot.
-            //Debes generar un SessionId único para cada usuario o cada vez que inicies una nueva conversación.
-            //Puedes generar un SessionId de cualquier manera que sea conveniente para tu aplicación.Por ejemplo,
-            //puedes utilizar un identificador único generado por tu aplicación o una combinación de datos del usuario.
-            //Es importante que el SessionId sea único para cada sesión de conversación para mantener el seguimiento adecuado
-            //del contexto de la conversación.
+            //SessionId único para cada usuario o cada vez que se inicie una nueva conversación (IdUser)
             SessionId = "163y68h",
             Text = userInput
         };
-
-        //var response = lexClient.RecognizeText(request);
         var response = await lexClient.RecognizeTextAsync(request);
-
-        // Procesa la respuesta del chatbot según sea necesario
-        if (response != null && response.Messages.Count > 0)
-        {
-            ViewBag.MENSAJE="Respuesta del chatbot: ";
-        }
+        string respuestaChat = response.Messages[0].Content;
+        ViewBag.BOTMENSAJE = respuestaChat;
+        //// Procesa la respuesta del chatbot según sea necesario
+        //if (response != null && response.Interpretations != null && response.Interpretations.Count > 0)
+        //{
+        //    var interpretation = response.Interpretations[0];
+        //    // Obtén el nombre de la ranura y el valor asignado si la respuesta es de éxito
+        //    if (interpretation.Intent.Name == "OrderFlowers")
+        //    {
+        //        // Cojo los slots posibles
+        //        var slots = interpretation.Intent.Slots;
+        //        // Si mi slot es "FlowerType", obtengo su valor
+        //        if (slots.ContainsKey("FlowerType"))
+        //        {
+        //            string slotValue = slots["FlowerType"].Value.InterpretedValue;
+        //            ViewBag.A = slotValue;
+        //        }
+        //    }
+        //}
         return View();
     }
 }

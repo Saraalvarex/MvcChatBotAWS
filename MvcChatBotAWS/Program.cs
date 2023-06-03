@@ -3,16 +3,16 @@ using Amazon.LexRuntimeV2;
 var builder = WebApplication.CreateBuilder(args);
 
 // Registro del servicio de Amazon Lex
-builder.Services.AddSingleton<AmazonLexRuntimeV2Client>(sp =>
-{
-    var credentials = new Amazon.Runtime.BasicAWSCredentials("AKIASED2MTKXG6T5KROW", "Ouqf1RzTatug7bZmz6N/7AWh3zryzJRMggmUcjKb");
-    var config = new AmazonLexRuntimeV2Config
-    {
-        RegionEndpoint = Amazon.RegionEndpoint.USEast1 // Virginia
-    };
+//builder.Services.AddSingleton<AmazonLexRuntimeV2Client>(sp =>
+//{
+//    var credentials = new Amazon.Runtime.BasicAWSCredentials("AKIASED2MTKXGT6F337H", "aXQ6RPK5dtKee4caVZey0kITgjJq6OguDtPW3xv0");
+//    var config = new AmazonLexRuntimeV2Config
+//    {
+//        RegionEndpoint = Amazon.RegionEndpoint.USEast1 // Virginia
+//    };
 
-    return new AmazonLexRuntimeV2Client(credentials, config);
-});
+//    return new AmazonLexRuntimeV2Client(credentials, config);
+//});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
