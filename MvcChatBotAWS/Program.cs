@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Registro del servicio de Amazon Lex
 //builder.Services.AddSingleton<AmazonLexRuntimeV2Client>(sp =>
 //{
-//    var credentials = new Amazon.Runtime.BasicAWSCredentials("AKIASED2MTKXGT6F337H", "aXQ6RPK5dtKee4caVZey0kITgjJq6OguDtPW3xv0");
+//    var credentials = new Amazon.Runtime.BasicAWSCredentials("Access key ID", "Secret access key");
 //    var config = new AmazonLexRuntimeV2Config
 //    {
 //        RegionEndpoint = Amazon.RegionEndpoint.USEast1 // Virginia

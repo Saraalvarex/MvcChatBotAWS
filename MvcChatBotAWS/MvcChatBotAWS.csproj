@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AWSSDK.Lambda" Version="3.7.110.6" />
     <PackageReference Include="AWSSDK.LexRuntimeV2" Version="3.7.101.66" />
+    <PackageReference Include="OpenAI" Version="1.7.2" />
   </ItemGroup>
 
 </Project>

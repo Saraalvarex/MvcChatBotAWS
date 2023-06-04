@@ -10,12 +10,16 @@ public class ChatController : Controller
     {
         lexClient = new AmazonLexRuntimeV2Client(); // Asegúrate de configurar las credenciales adecuadas
     }
-
+    public IActionResult Index()
+    {
+        return View();
+    }
     public IActionResult SendMessageToChatBot()
     {
         return View();
     }
 
+    //QUESTION ¿Cuál es el circuito más complicado de F1?
     [HttpPost]
     public async Task<IActionResult> SendMessageToChatBot(string userInput)
     {
@@ -32,11 +36,10 @@ public class ChatController : Controller
         var response = await lexClient.RecognizeTextAsync(request);
         string respuestaChat = response.Messages[0].Content;
         ViewBag.BOTMENSAJE = respuestaChat;
-        //// Procesa la respuesta del chatbot según sea necesario
         //if (response != null && response.Interpretations != null && response.Interpretations.Count > 0)
         //{
         //    var interpretation = response.Interpretations[0];
-        //    // Obtén el nombre de la ranura y el valor asignado si la respuesta es de éxito
+        //    //obtengo el nombre de la ranura y el valor asignado si la respuesta es de éxito
         //    if (interpretation.Intent.Name == "OrderFlowers")
         //    {
         //        // Cojo los slots posibles
