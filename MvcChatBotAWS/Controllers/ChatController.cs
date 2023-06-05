@@ -19,7 +19,7 @@ public class ChatController : Controller
         return View();
     }
 
-    //QUESTION ¿Cuál es el circuito más complicado de F1?
+    //QUESTION: ¿Cuál es el circuito más complicado de F1?
     [HttpPost]
     public async Task<IActionResult> SendMessageToChatBot(string userInput)
     {
