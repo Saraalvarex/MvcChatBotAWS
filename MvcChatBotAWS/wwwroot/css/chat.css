@@ -7,7 +7,7 @@ body {
 
 .container-chat {
     overflow-y: scroll;
-    height: 250px
+    height: 300px
 }
 
 .card {
