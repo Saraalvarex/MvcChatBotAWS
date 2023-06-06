@@ -5,10 +5,18 @@ body {
     /*font-family: 'Roboto', sans-serif;*/
 }
 
+.container-chat {
+    overflow-y: scroll;
+    height: 250px
+}
+
 .card {
     width: 300px;
     border: none;
     border-radius: 15px;
+    position: absolute;
+    bottom: 70px;
+    right: 40px;
 }
 
 .adiv {
