@@ -2,7 +2,16 @@
 {
     public class Assistant
     {
-        string Prompt { get; set; }
-        string Answer { get; set; }
+        //0 -> UserMessage 
+        //1 -> BotMessage
+        public int Id { get; set; }
+        public MessageType MsgType { get; set; }
+        public string ChatMessage { get; set; }
+    }
+
+    public enum MessageType
+    {
+        UserMessage,
+        BotMessage
     }
 }
