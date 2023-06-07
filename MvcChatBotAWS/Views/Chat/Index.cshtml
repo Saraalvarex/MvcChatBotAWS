@@ -22,7 +22,10 @@
             <div class="container-chat">
                 <div class="d-flex flex-row p-3">
                     <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="30" height="30">
-                    <div class="chat ml-2 p-3">Hello and thankyou for visiting birdlymind. Please click the video above</div>
+                    <div class="chat ml-2 p-3">
+                        Bienvenido al canal de soporte oficial de F1® JimmyPetardo.
+                        Por favor, cuéntanos en qué te podemos ayudar
+                    </div>
                 </div>
                 @if (Model != null)
                 {
@@ -41,7 +44,8 @@
                             @*USER*@
                             <div class="d-flex flex-row p-3">
                                 <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="30" height="30">
-                                <div class="chat ml-2 p-3"><span class="text-muted dot">@assistant.ChatMessage.</span></div>
+                                @*<div class="chat ml-2 p-3"><span class="text-muted">@assistant.ChatMessage</span></div>*@
+                                <div class="chat ml-2 p-3"><span class="text-muted dot">@assistant.ChatMessage</span></div>
                             </div>
                         }
                     }

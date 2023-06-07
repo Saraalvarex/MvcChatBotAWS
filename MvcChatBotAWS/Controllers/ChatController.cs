@@ -9,20 +9,16 @@ using System.Net;
 public class ChatController : Controller
 {
     private readonly AmazonLexRuntimeV2Client lexClient;
-
+    public static List<Assistant> botMessages; // Declarar la lista como estática
     public ChatController()
     {
         lexClient = new AmazonLexRuntimeV2Client(); // Asegúrate de configurar las credenciales adecuadas
     }
-    //public IActionResult Index()
-    //{
-    //    return View();
-    //}
     public IActionResult Index()
     {
         return View();
     }
-    //EJEMPLOS PREGUNTAS CHATBOT: (Preguntas sencillas y con respuestas cortas)
+    //EJEMPLOS PREGUNTAS CHATBOT:
     //Mas vueltas
     //Mas curvas
     //Mas larga/mayor distancia
@@ -33,8 +29,10 @@ public class ChatController : Controller
     //SendMensajeChatbot y getrespuesta
     public async Task<IActionResult> Index(string userInput)
     {
-        //si la lista esta vacia tal y sino tal
-        List<Assistant> botMessages = new List<Assistant>();
+        if (botMessages == null)
+        {
+            botMessages = new List<Assistant>();
+        }
         //Assistant assistant = new Assistant();
         var request = new RecognizeTextRequest
         {
@@ -46,11 +44,16 @@ public class ChatController : Controller
             SessionId = "163y68h",
             Text = userInput
         };
+        //USER MENSAJE
+        botMessages.Add(
+            new Assistant()
+        { 
+            MsgType = MessageType.UserMessage,
+            ChatMessage = userInput 
+        });
         var response = await lexClient.RecognizeTextAsync(request);
-        //response.SessionStateValue.DialogAction.SlotToElicit;
         string respuestaChat = response.Messages[0].Content;
-        //ViewBag.BOTMENSAJE = respuestaChat;
-        //assistant.ChatMessage = respuestaChat;
+        //BOT MENSAJE
         botMessages.Add(
             new Assistant()
             {
