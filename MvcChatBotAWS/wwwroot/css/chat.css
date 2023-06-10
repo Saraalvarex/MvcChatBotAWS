@@ -1,13 +1,14 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
+﻿/*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+*/
 body {
     background: #EEEEEE;
     /*font-family: 'Roboto', sans-serif;*/
 }
 
 .container-chat {
-    overflow-y: scroll;
-    height: 370px
+    height: 370px;
+    max-height: 300px; /* Establece la altura máxima del contenedor */
+    overflow-y: auto; /* Muestra el scroll vertical solo cuando sea necesario */
 }
 
 .card {
@@ -34,9 +35,21 @@ body {
     /*font-size: 10px;*/
     border-radius: 20px;
 }
+
+.user-mns {
+    justify-content: flex-end;
+}
+
 .txt-chat {
     resize: none;
-    margin-right: 10px;
+    flex: 1;
+    margin-right: 0;
+}
+
+.chat-input-form {
+    display: flex;
+    width: 100%;
+    margin-right: 0;
 }
 
 .btn-chat {
@@ -62,6 +75,7 @@ body {
     justify-content: center;
     display: flex;
     align-items: center;
+    margin-left:4px;
 }
 .send-chat {
     /*-webkit-justify-content: center;

@@ -34,14 +34,14 @@
                         @*BOT*@
                         if (assistant.MsgType == MvcChatBotAWS.Models.MessageType.UserMessage)
                         {
-                            <div class="d-flex flex-row p-3">
+                            <div class="d-flex flex-row p-3 user-mns">
                                 <div class="bg-white mr-2 p-3"><span class="text-muted">@assistant.ChatMessage</span></div>
                                 <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" width="30" height="30">
                             </div>
                         }
                         else
                         {
-                            @*USER*@
+                         @*USER*@
                             <div class="d-flex flex-row p-3">
                                 <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="30" height="30">
                                 @*<div class="chat ml-2 p-3"><span class="text-muted">@assistant.ChatMessage</span></div>*@
@@ -52,7 +52,7 @@
                 }
             </div>
             <div class="d-flex flex-row p-3 form-group px-3">
-                <form method="post">
+                <form method="post" class="chat-input-form">
                     <textarea name="userInput" class="form-control txt-chat" rows="1" placeholder="Escribe tu mensaje"></textarea>
 
                 <button class="btn-chat" type="submit" aria-label="send">
