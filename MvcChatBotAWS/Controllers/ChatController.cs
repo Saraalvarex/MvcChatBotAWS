@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MvcChatBotAWS.Models;
 using MvcChatBotAWS.Extensions;
 using System.Net;
+using Newtonsoft.Json.Linq;
 
 public class ChatController : Controller
 {
@@ -44,12 +45,74 @@ public class ChatController : Controller
 
         string respuestaChat = await lexClient.GetMessages("PDQFFBWOFP", "WBACPFOPCQ", "es_ES", "163y68h", userInput);
 
-        botMessages.Add(new Assistant()
+        if (userInput.Equals("¿Cuál es el piloto con mas puntos?", StringComparison.OrdinalIgnoreCase))
         {
-            Id = 0,
-            MsgType = MessageType.BotMessage,
-            ChatMessage = respuestaChat
-        });
+            using (HttpClient client = new HttpClient())
+            {
+                string url = "http://ergast.com/api/f1/current/driverstandings.json";
+                HttpResponseMessage response = await client.GetAsync(url);
+                string responseBody = await response.Content.ReadAsStringAsync();
+
+                // Deserializar la respuesta JSON
+                JObject json = JObject.Parse(responseBody);
+
+                // Obtener la lista de pilotos
+                List<JToken> driverStandings = json["MRData"]["StandingsTable"]["StandingsLists"][0]["DriverStandings"].Children().ToList();
+
+                // Encontrar el piloto con más puntos
+                int maxPoints = 0;
+                string driverName = "";
+
+                foreach (JToken driver in driverStandings)
+                {
+                    int points = int.Parse(driver["points"].ToString());
+                    if (points > maxPoints)
+                    {
+                        maxPoints = points;
+                        driverName = driver["Driver"]["givenName"].ToString() + " " + driver["Driver"]["familyName"].ToString();
+                    }
+                }
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResult = await response.Content.ReadAsStringAsync();
+                    // Procesar los datos JSON de los resultados de la clasificación aquí
+                    botMessages.Add(new Assistant()
+                    {
+                        Id = 0,
+                        MsgType = MessageType.BotMessage,
+                        //personalizar respuesta
+                        ChatMessage = $"El piloto con más puntos es {driverName} con {maxPoints} puntos)"
+                    });
+                }
+                //else if (userInput=="¿Cuál es el equipo con mas puntos?")
+                //{
+
+                //}
+                else
+                {
+                    // Manejar el error de la solicitud HTTP aquí
+                    botMessages.Add(new Assistant()
+                    {
+                        Id = 0,
+                        MsgType = MessageType.BotMessage,
+                        //personalizar respuesta
+                        ChatMessage = "nores"
+                    });
+                }
+            }
+
+            
+        }
+        else
+        {
+            botMessages.Add(new Assistant()
+            {
+                Id = 0,
+                MsgType = MessageType.BotMessage,
+                //personalizar respuesta
+                ChatMessage = respuestaChat
+            });
+        }
 
         return View(botMessages);
     }

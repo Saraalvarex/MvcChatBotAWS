@@ -18,8 +18,17 @@ namespace MvcChatBotAWS.Extensions
             };
 
             var response = await lexClient.RecognizeTextAsync(request);
-            string respuestaChat = response.Messages[0].Content;
-            return respuestaChat;
+
+            if (response.Messages.Count > 0)
+            {
+                string respuestaChat = response.Messages[0].Content;
+                return respuestaChat;
+            }
+            else
+            {
+                // Manejar el caso de que el bot no reconozca el input
+                return "No se encontraron mensajes en la respuesta";
+            }
         }
         public static async Task<string> GetMessages(this AmazonLexRuntimeV2Client lexClient, string botId, string botAliasId, string localeId, string sessionId, string userInput)
         {
