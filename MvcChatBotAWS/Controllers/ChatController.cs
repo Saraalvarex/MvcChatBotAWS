@@ -81,24 +81,24 @@ public class ChatController : Controller
                         Id = 0,
                         MsgType = MessageType.BotMessage,
                         //personalizar respuesta
-                        ChatMessage = $"El piloto con más puntos es {driverName} con {maxPoints} puntos)"
+                        ChatMessage = $"El piloto con más puntos es {driverName} con {maxPoints} puntos"
                     });
                 }
                 //else if (userInput=="¿Cuál es el equipo con mas puntos?")
                 //{
 
                 //}
-                else
-                {
-                    // Manejar el error de la solicitud HTTP aquí
-                    botMessages.Add(new Assistant()
-                    {
-                        Id = 0,
-                        MsgType = MessageType.BotMessage,
-                        //personalizar respuesta
-                        ChatMessage = "nores"
-                    });
-                }
+                //else
+                //{
+                //    // Manejar el error de la solicitud HTTP aquí
+                //    botMessages.Add(new Assistant()
+                //    {
+                //        Id = 0,
+                //        MsgType = MessageType.BotMessage,
+                //        //personalizar respuesta
+                //        ChatMessage = "nores"
+                //    });
+                //}
             }
 
             
