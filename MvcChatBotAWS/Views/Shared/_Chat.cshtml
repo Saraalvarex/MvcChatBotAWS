@@ -1,0 +1,130 @@
+﻿@model List<Assistant>
+@{
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] - MvcChatBotAWS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.csss" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/chat.css" asp-append-version="true" />
+</head>
+<body>
+    <div id="contenido" class="container d-flex justify-content-center">
+        <div class="card mt-5">
+            <div class="d-flex flex-row justify-content-between p-3 adiv text-white">
+                <i class="fas fa-chevron-left"></i>
+                <span class="pb-3">Live chat</span>
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="container-chat">
+                <div class="d-flex flex-row p-3">
+                    <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="30" height="30">
+                    <div class="chat ml-2 p-3">
+                        Bienvenido al canal de soporte oficial de F77®.
+                        Por favor, cuéntanos en qué te podemos ayudar
+                    </div>
+                </div>
+                @*@if (Model != null)
+                {*@
+                    <div id="chatContainer"></div>
+
+                    @*@foreach (var assistant in Model)
+                    {
+                        
+                        if (assistant.MsgType == MvcChatBotAWS.Models.MessageType.UserMessage)
+                        {
+                            <div class="d-flex flex-row p-3 user-mns">
+                                <div class="bg-white-chat mr-2 p-3"><span class="text-muted">@assistant.ChatMessage</span></div>
+                                <img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" width="30" height="30">
+                            </div>
+                        }
+                        else
+                        {
+                            
+                            <div class="d-flex flex-row p-3">
+                                <img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="30" height="30">
+                                @*<div class="chat ml-2 p-3"><span class="text-muted">@assistant.ChatMessage</span></div>
+                                <div class="chat ml-2 p-3"><span class="text-muted dot">@assistant.ChatMessage</span></div>
+                            </div>
+                        }
+                    }*@
+                @*}*@
+            </div>
+            <div class="d-flex flex-row p-3 form-group px-3">
+ @*               <form method="post" asp-controller="Chat" asp-action="_Chat" class="chat-input-form">
+                    <input name="userInput" class="form-control txt-chat" placeholder="Escribe tu mensaje"/>
+                    <button class="btn-chat" type="submit" aria-label="send">
+                        <span class="send-chat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="18" height="18">
+                                <g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+                                    <g stroke="currentColor" stroke-width="2">
+                                        <path d="M16 0.485L9.41 15.976 6.044 9.753" transform="translate(2 2)">
+                                        </path>
+                                        <path d="M16 .485L.078 5.951 6.044 9.753M16 .485L6.044 9.753" transform="translate(2 2)">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </button>
+                </form>*@
+                <form id="chatForm" class="chat-input-form">
+                    <input id="userInput" name="userInput" class="form-control txt-chat" placeholder="Escribe tu mensaje" />
+                        <button id="sendButton" class="btn-chat" type="button" aria-label="send">
+                            <span class="send-chat">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="18" height="18">
+                                <!-- Icono de enviar -->
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            // ...
+
+            // Función para actualizar la vista del chat
+            function updateChatView(messages) {
+                var chatContainer = $("#chatContainer");
+
+                // Limpiar el contenedor del chat
+                chatContainer.empty();
+
+                // Recorrer los mensajes y agregarlos al contenedor del chat
+                for (var i = 0; i < messages.length; i++) {
+                    var message = messages[i];
+                    var messageHtml = "";
+
+                    if (message.MsgType === "UserMessage") {
+                        // Construir el HTML para el mensaje del usuario
+                        messageHtml = '<div class="d-flex flex-row p-3 user-mns">' +
+                            '<div class="bg-white-chat mr-2 p-3"><span class="text-muted">' + message.ChatMessage + '</span></div>' +
+                            '<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-7.png" width="30" height="30">' +
+                            '</div>';
+                    } else if (message.MsgType === "BotMessage") {
+                        // Construir el HTML para el mensaje del bot
+                        messageHtml = '<div class="d-flex flex-row p-3">' +
+                            '<img src="https://img.icons8.com/color/48/000000/circled-user-female-skin-type-7.png" width="30" height="30">' +
+                            '<div class="chat ml-2 p-3"><span class="text-muted dot">' + message.ChatMessage + '</span></div>' +
+                            '</div>';
+                    }
+
+                    // Agregar el mensaje al contenedor del chat
+                    chatContainer.append(messageHtml);
+                }
+            }
+
+            // ...
+        });
+    </script>
+</body>
+</html>

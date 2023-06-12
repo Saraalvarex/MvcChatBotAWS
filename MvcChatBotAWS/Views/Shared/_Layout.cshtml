@@ -26,19 +26,21 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Index">Chat index</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="SendMessageToChatBot">Mensaje</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Chat" asp-action="Prueba">Prueba</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    <partial name="_Chat"/>
+@*    @await RenderSectionAsync("content", required: false)*@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
+    <div id="contenido"></div>
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - MvcChatBotAWS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
